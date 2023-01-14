@@ -97,5 +97,6 @@ require 'scripts/pi-hole/php/header.php';
     </div>
 </div>
 <script src="scripts/pi-hole/js/footer.js?v=<?php echo $cacheVer; ?>"></script>
+<script src="scripts/pi-hole/js/webauthn.js"></script>
 </body>
 </html>
