@@ -224,6 +224,9 @@ if (isset($_GET['tab']) && in_array($_GET['tab'], array('sysadmin', 'dns', 'piho
                 <li role="presentation"<?php if ($tab === 'teleporter') { ?> class="active"<?php } ?>>
                     <a href="#teleporter" aria-controls="teleporter" aria-expanded="<?php echo $tab === 'teleporter' ? 'true' : 'false'; ?>" role="tab" data-toggle="tab">Teleporter</a>
                 </li>
+                <li role="presentation"<?php if ($tab === 'passkeys') { ?> class="active"<?php } ?>>
+                    <a href="#passkeys" aria-controls="passkeys" aria-expanded="<?php echo $tab === 'passkeys' ? 'true' : 'false'; ?>" role="tab" data-toggle="tab">Passkeys</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <!-- ######################################################### System admin ######################################################### -->
@@ -1457,6 +1460,52 @@ if (isset($piholeFTLConf['RATE_LIMIT'])) {
                         <?php } ?>
                     </div>
                 </div>
+                <!-- ######################################################### Passkeys ######################################################### -->
+                <div id="passkeys" class="tab-pane fade<?php if ($tab === 'passkeys') { ?> in active<?php } ?>">
+                <div class="row">
+                        <div class="col-md-12">
+                            <form role="form" method="post">
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Passkey settings</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <p>Registered Passkeys</p>
+                                        <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>userName</th>
+                                                        <th>userId</th>
+                                                        <th>credentialPublicKey</th>
+                                                    </tr>
+
+                                                    <?php
+                                                        $WebAuthnUserDatabase = 'webauthn_users.data';
+                                                        $webauthnUserData = unserialize(file_get_contents($WebAuthnUserDatabase));
+                                                        if (is_array($webauthnUserData["registrations"])) {
+                                                            foreach ($webauthnUserData["registrations"] as $reg) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td> <?php echo $reg->userName ?> </td>
+                                                                        <td> <?php echo $reg->userId ?> </td>
+                                                                        <td> <?php echo $reg->credentialPublicKey ?> </td>
+                                                                    </tr>
+                                                                <?php
+
+                                                            }
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        <br>
+                                        <button type="button" onclick="registerWebauthNUser()" class="btn btn-default">Register New Passkey</button>
+                                        <button type="button" onclick="clearWebauthNRegistrations()" class="btn btn-default">Clear All Registration</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1464,7 +1513,7 @@ if (isset($piholeFTLConf['RATE_LIMIT'])) {
 
 <script src="scripts/vendor/jquery.confirm.min.js?v=<?php echo $cacheVer; ?>"></script>
 <script src="scripts/pi-hole/js/settings.js?v=<?php echo $cacheVer; ?>"></script>
-
+<script src="scripts/pi-hole/js/webauthn.js"></script>
 <?php
 require 'scripts/pi-hole/php/footer.php';
 ?>
