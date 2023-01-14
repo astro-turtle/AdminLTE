@@ -98,5 +98,8 @@ function verifyPassword($pwhash, $use_api = false)
     return $validpassword;
 }
 
-$wrongpassword = !verifyPassword($pwhash, isset($api));
+if (isset($_POST['pw'])){
+    $wrongpassword = !verifyPassword($pwhash, isset($api));
+}
+
 $auth = $_SESSION['auth'];
