@@ -19,3 +19,6 @@ test.html
 
 # Composer
 /vendor/
+
+# WebauthN Users
+webauthn_users.data
