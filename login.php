@@ -51,9 +51,12 @@ require 'scripts/pi-hole/php/header.php';
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary form-control"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Log in</button>
+                        <button type="submit" class="btn btn-primary form-control"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Log in with Password</button>
                     </div>
                 </form>
+                <div>
+                    <button type="button" onclick="checkWebauthNUser()" class="btn btn-primary form-control"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Log in with Passkey</button>
+                </div>
                 <br>
                 <div class="row">
                     <div class="col-xs-12">
