@@ -32,7 +32,7 @@ try {
     // new Instance of the server library.
     $WebAuthn = new lbuchs\WebAuthn\WebAuthn($rpName, $rpId, $formats);
 
-    $WebAuthnUserDatabase = 'webauthn_users.data'; // Local File for User Store
+    $WebAuthnUserDatabase = '../webauthn_users.data'; // Local File for User Store
 
     $post = trim(file_get_contents('php://input'));
     if ($post) {

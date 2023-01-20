@@ -1480,7 +1480,7 @@ if (isset($piholeFTLConf['RATE_LIMIT'])) {
                                                     </tr>
 
                                                     <?php
-                                                        $WebAuthnUserDatabase = 'webauthn_users.data';
+                                                        $WebAuthnUserDatabase = '../webauthn_users.data';
                                                         $webauthnUserData = unserialize(file_get_contents($WebAuthnUserDatabase));
                                                         if (is_array($webauthnUserData["registrations"])) {
                                                             foreach ($webauthnUserData["registrations"] as $reg) {
