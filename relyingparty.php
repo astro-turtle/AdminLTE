@@ -45,7 +45,10 @@ try {
 
     if ($fn === 'getCreateArgs') {
 
-        // TODO: User should be authenticated to perform this. Add authenticated check.
+        // User should be authenticated to perform this.
+        if ($_SESSION['auth'] != true) {
+            throw new \Exception('Only authenticated users can perform action');
+        }
 
         $createArgs = $WebAuthn->getCreateArgs(\hex2bin($userId), $userName, $userDisplayName, 20, $requireResidentKey, $userVerification, $crossPlatformAttachment);
 
@@ -61,7 +64,10 @@ try {
 
     } else if ($fn === 'processCreate') {
 
-        // TODO: User should be authenticated to perform this. Add authenticated check.
+        // User should be authenticated to perform this.
+        if ($_SESSION['auth'] != true) {
+            throw new \Exception('Only authenticated users can perform action');
+        }
 
         $clientDataJSON = base64_decode($post->clientDataJSON);
         $attestationObject = base64_decode($post->attestationObject);
@@ -177,7 +183,10 @@ try {
 
     } else if ($fn === 'clearRegistrations') {
 
-        // TODO: User should be authenticated to perform this. Add authenticated check.
+        // User should be authenticated to perform this.
+        if ($_SESSION['auth'] != true) {
+            throw new \Exception('Only authenticated users can perform action');
+        }
 
         file_put_contents($WebAuthnUserDatabase, '');
 
